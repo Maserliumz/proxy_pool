@@ -42,7 +42,7 @@ class _ThreadFetcher(Thread):
                     self.proxy_dict[proxy].add_source(self.fetch_source)
                 else:
                     self.proxy_dict[proxy] = Proxy(
-                        proxy, source=self.fetch_source)
+                        proxy, source=self.fetch_source) # 在这里获取抓取的代理信息 
         except Exception as e:
             self.log.error("ProxyFetch - {func}: error".format(func=self.fetch_source))
             self.log.error(str(e))

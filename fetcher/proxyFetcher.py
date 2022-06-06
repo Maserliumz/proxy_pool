@@ -12,8 +12,10 @@
 """
 __author__ = 'JHao'
 
-import re
+import re,json
 from time import sleep
+
+from pandas import read_json
 
 from util.webRequest import WebRequest
 
@@ -22,6 +24,23 @@ class ProxyFetcher(object):
     """
     proxy getter
     """
+
+    @staticmethod
+    def read_json(path):
+        with open(path,'r',encoding='utf-8')as rfp:
+            read_json=[]
+            for l in rfp:
+                l=json.loads(l)
+                read_json.append(l)
+        return read_json
+
+    def _judge_ch(area_str):
+        '''判断代理是否为国内的代理'''
+        cities=read_json('./cities.json')
+        for c in cities:
+            if c in area_str:
+                return True
+        return False
 
     @staticmethod
     def freeProxy01():
